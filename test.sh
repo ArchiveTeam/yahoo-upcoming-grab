@@ -9,6 +9,6 @@
   --page-requisites --span-hosts \
   -nv \
   --reject-regex='\.bc\.yahoo\.com|analytics\.yahoo\.com|overture\.com|l\.yimg\.com/d/combo' \
-  http://upcoming.yahoo.com/venue/750802
+  http://upcoming.yahoo.com/venue/750802 \
   http://upcoming.yahoo.com/event/148676
 
