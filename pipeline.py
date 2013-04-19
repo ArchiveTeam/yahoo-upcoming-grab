@@ -216,7 +216,7 @@ project = Project(
   title = "Upcoming",
   project_html = """
     <img class="project-logo" alt="Upcoming" src="http://archiveteam.org/images/1/10/Upcoming_yahoo_com_logo.png" />
-    <h2>Yahoo! Messages <span class="links"><a href="http://upcoming.com/">Website</a> &middot; <a 
+    <h2>Yahoo! Messages <span class="links"><a href="http://upcoming.yahoo.com/">Website</a> &middot; <a 
 href="http://tracker.archiveteam.org/upcoming/">Leaderboard</a></span></h2>
     <p>Yahoo! (who else?) is closing <i>Upcoming</i> on April 30, 2013.</p>
   """
@@ -247,7 +247,7 @@ pipeline = Pipeline(
   # warc_prefix is the first part of the warc filename
   #
   # this task will set item["item_dir"] and item["warc_file_base"]
-  PrepareDirectories(warc_prefix="upcoming.com"),
+  PrepareDirectories(warc_prefix="upcoming.yahoo.com"),
 
   # execute Wget+Lua
   #
@@ -271,8 +271,8 @@ pipeline = Pipeline(
       "--lua-script", "upcoming.lua",
       "--warc-file", ItemInterpolation("%(item_dir)s/%(warc_file_base)s"),
       "--warc-header", "operator: Archive Team",
-      "--warc-header", "upcoming-dld-script-version: " + VERSION,
-      "--warc-header", ItemInterpolation("upcoming-task: %(item_name)s"),
+      "--warc-header", "yahoo-upcoming-dld-script-version: " + VERSION,
+      "--warc-header", ItemInterpolation("yahoo-upcoming-task: %(item_name)s"),
       "--input", "-"
     ],
     max_tries = 2,
