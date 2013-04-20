@@ -77,3 +77,16 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
 end
 
 
+wget.callbacks.httploop_result = function(url, err, http_stat)
+  if http_stat.statcode == 999 then
+    -- try again
+    io.stdout:write("\nYahoo rate limit (error 999). Waiting for 300 seconds...\n")
+    io.stdout:flush()
+    os.execute("sleep 300")
+    return wget.actions.CONTINUE
+  else
+    return wget.actions.NOTHING
+  end
+end
+
+
