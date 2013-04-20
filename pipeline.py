@@ -216,7 +216,7 @@ project = Project(
   title = "Upcoming",
   project_html = """
     <img class="project-logo" alt="Upcoming" src="http://archiveteam.org/images/1/10/Upcoming_yahoo_com_logo.png" />
-    <h2>Yahoo! Messages <span class="links"><a href="http://upcoming.yahoo.com/">Website</a> &middot; <a 
+    <h2>Upcoming <span class="links"><a href="http://upcoming.yahoo.com/">Website</a> &middot; <a 
 href="http://tracker.archiveteam.org/upcoming/">Leaderboard</a></span></h2>
     <p>Yahoo! (who else?) is closing <i>Upcoming</i> on April 30, 2013.</p>
   """
