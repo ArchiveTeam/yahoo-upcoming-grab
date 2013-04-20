@@ -71,6 +71,52 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     table.insert(urls, { url=(venue_base.."?show=past-only"), link_expect_html=1 })
   end
 
+  -- GROUP
+  local group_id = string.match(url, "^http://upcoming%.yahoo%.com/group/([0-9]+)/[^/]*$")
+  if group_id then
+    table.insert(urls, { url=("http://upcoming.yahoo.com/group/"..group_id.."/history/"), link_expect_html=1 })
+
+    local html = read_file(file)
+    for page_num in string.gmatch(html, "%?page=([0-9]+)") do
+      table.insert(urls, { url=("http://upcoming.yahoo.com/group/"..group_id.."/?page="..page_num), link_expect_html=1 })
+    end
+    for topic_id in string.gmatch(html, "/group/topic/([0-9]+)/") do
+      table.insert(urls, { url=("http://upcoming.yahoo.com/group/topic/"..topic_id.."/"), link_expect_html=1 })
+    end
+  end
+
+  -- GROUP HISTORY
+  local group_id = string.match(url, "^http://upcoming%.yahoo%.com/group/([0-9]+)/history/")
+  if group_id then
+    table.insert(urls, { url=("http://upcoming.yahoo.com/group/"..group_id.."/history/"), link_expect_html=1 })
+
+    local html = read_file(file)
+    for page_num in string.gmatch(html, "%?page=([0-9]+)") do
+      table.insert(urls, { url=("http://upcoming.yahoo.com/group/"..group_id.."/history/?page="..page_num), link_expect_html=1 })
+    end
+  end
+
+  -- GROUP DIRECTORY
+  local group_id = string.match(url, "^http://upcoming%.yahoo%.com/group/directory/")
+  if group_id then
+    table.insert(urls, { url=("http://upcoming.yahoo.com/group/directory/?page=all"), link_expect_html=1 })
+
+    local html = read_file(file)
+    for page_num in string.gmatch(html, "%?page=([0-9]+)") do
+      table.insert(urls, { url=("http://upcoming.yahoo.com/group/directory/?page="..page_num), link_expect_html=1 })
+    end
+  end
+
+  -- USER
+  local user_id = string.match(url, "^http://upcoming%.yahoo%.com/user/([0-9]+)/$")
+  if user_id then
+    table.insert(urls, { url=("http://upcoming.yahoo.com/user/"..user_id.."/past/"), link_expect_html=1 })
+    table.insert(urls, { url=("http://upcoming.yahoo.com/ajax/user_page_all_events.php?user_id="..user_id.."&v=future") })
+    table.insert(urls, { url=("http://upcoming.yahoo.com/ajax/user_page_all_events.php?user_id="..user_id.."&v=past") })
+    table.insert(urls, { url=("http://upcoming.yahoo.com/ajax/user_artists.php"), post_data=("cmd=get&user_id="..user_id.."&offset=0&count=10000") })
+    table.insert(urls, { url=("http://upcoming.yahoo.com/ajax/user_venue.php"), post_data=("cmd=get&user_id="..user_id.."&count=10000") })
+  end
+
   -- print(table.show(urls))
 
   return urls
