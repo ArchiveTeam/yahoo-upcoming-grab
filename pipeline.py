@@ -42,7 +42,7 @@ USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.20
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20130420.03"
+VERSION = "20130424.01"
 
 
 
@@ -277,7 +277,7 @@ pipeline = Pipeline(
     ],
     max_tries = 2,
     # check this: which Wget exit codes count as a success?
-    accept_on_exit_code = [ 0, 6, 8 ],
+    accept_on_exit_code = [ 0, 6, 8, 4 ], # 4 = network error
     stdin_data_function = (lambda item: item["task_urls"])
   ),
 
